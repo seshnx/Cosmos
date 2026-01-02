@@ -42,7 +42,7 @@ jobs:
           # Copy AU bundle
           find build -name "*.component" -type d -exec cp -R {} artifacts/macos/ \;
           # Copy Standalone app
-          find build -name "SeshNx_Cosmos.app" -type d -exec cp -R {} artifacts/macos/ \;
+          find build -name "Cosmos.app" -type d -exec cp -R {} artifacts/macos/ \;
 
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
@@ -142,7 +142,7 @@ jobs:
           # Find and copy VST3
           find build -name "*.vst3" -type d -exec cp -R {} artifacts/linux/ \;
           # Find and copy Standalone
-          find build -type f -name "SeshNx_Cosmos" -executable -exec cp {} artifacts/linux/ \;
+          find build -type f -name "Cosmos" -executable -exec cp {} artifacts/linux/ \;
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v4
@@ -215,17 +215,17 @@ jobs:
           cp -R "$BUNDLE" output/VST3/
 
           # Copy platform-specific standalones
-          if [ -d "builds/build-macos/SeshNx_Cosmos.app" ]; then
-            cp -R builds/build-macos/SeshNx_Cosmos.app output/macOS/
+          if [ -d "builds/build-macos/Cosmos.app" ]; then
+            cp -R builds/build-macos/Cosmos.app output/macOS/
           fi
-          if [ -d "builds/build-macos/SeshNx_Cosmos.component" ]; then
-            cp -R builds/build-macos/SeshNx_Cosmos.component output/macOS/
+          if [ -d "builds/build-macos/Cosmos.component" ]; then
+            cp -R builds/build-macos/Cosmos.component output/macOS/
           fi
           if [ -f "builds/build-windows/SeshNx Cosmos.exe" ]; then
             cp builds/build-windows/SeshNx\ Cosmos.exe output/Windows/
           fi
-          if [ -f "builds/build-linux/SeshNx_Cosmos" ]; then
-            cp builds/build-linux/SeshNx_Cosmos output/Linux/
+          if [ -f "builds/build-linux/Cosmos" ]; then
+            cp builds/build-linux/Cosmos output/Linux/
           fi
 
       - name: Upload Universal VST3 Bundle
