@@ -5,9 +5,6 @@ project(Cosmos VERSION 1.0.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# AAX SDK Path
-set(AAX_SDK_PATH "C:/aax-sdk-2-9-0" CACHE PATH "Path to AAX SDK")
-
 # JUCE setup via FetchContent
 include(FetchContent)
 FetchContent_Declare(
@@ -18,15 +15,12 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(JUCE)
 
-# Set AAX SDK path
-juce_set_aax_sdk_path(${AAX_SDK_PATH})
-
 # Plugin definition
 juce_add_plugin(Cosmos
     COMPANY_NAME "SeshNx"
     PLUGIN_MANUFACTURER_CODE Sesh
     PLUGIN_CODE Cosm
-    FORMATS VST3 AU Standalone AAX
+    FORMATS VST3 AU Standalone
     PRODUCT_NAME "SeshNx Cosmos"
     IS_SYNTH FALSE
     NEEDS_MIDI_INPUT FALSE
