@@ -1,0 +1,104 @@
+name: Build
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Configure CMake
+      run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: cmake --build build --config Release
+
+    - name: Upload VST3 Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: SeshNx-Cosmos-Windows-VST3
+        path: build/Cosmos_artefacts/Release/VST3/
+
+    - name: Upload Standalone Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: SeshNx-Cosmos-Windows-Standalone
+        path: build/Cosmos_artefacts/Release/Standalone/
+
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Configure CMake
+      run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: cmake --build build --config Release
+
+    - name: Upload VST3 Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: SeshNx-Cosmos-macOS-VST3
+        path: build/Cosmos_artefacts/Release/VST3/
+
+    - name: Upload AU Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: SeshNx-Cosmos-macOS-AU
+        path: build/Cosmos_artefacts/Release/AU/
+      if: always()
+
+    - name: Upload Standalone Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: SeshNx-Cosmos-macOS-Standalone
+        path: build/Cosmos_artefacts/Release/Standalone/
+
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libasound2-dev libcurl4-openssl-dev libx11-dev libxinerama-dev libxext-dev libfreetype6-dev libwebkit2gtk-4.0-dev libglu1-mesa-dev
+
+    - name: Setup CMake
+      uses: lukka/get-cmake@latest
+
+    - name: Configure CMake
+      run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: cmake --build build --config Release
+
+    - name: Upload VST3 Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: SeshNx-Cosmos-Linux-VST3
+        path: build/Cosmos_artefacts/Release/VST3/
+
+    - name: Upload Standalone Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: SeshNx-Cosmos-Linux-Standalone
+        path: build/Cosmos_artefacts/Release/Standalone/

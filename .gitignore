@@ -1,0 +1,45 @@
+# Build directories
+build/
+cmake-build-*/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# Compiled binaries
+*.exe
+*.dll
+*.so
+*.dylib
+*.lib
+*.a
+*.o
+*.obj
+
+# JUCE build artifacts
+*_artefacts/
+JuceLibraryCode/
+
+# IDE files
+.vs/
+.vscode/
+*.vcxproj
+*.vcxproj.filters
+*.sln
+*.suo
+*.user
+*.slnx
+
+# macOS bundles
+*.app
+*.vst3
+*.component
+*.aaxplugin
+
+# Plugin specific
+.DS_Store
+*.nul
